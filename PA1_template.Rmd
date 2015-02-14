@@ -85,7 +85,13 @@ The daily median is 10395.
 
 ## What is the average daily activity pattern?
 
+The average computed across each 3-minute interval and across all days can be computed by subsetting a new datframe using 'data$interval' and summarized by mean.
 
+```{getting mean for the 5-min intervals}
+avg.steps.per.interval<- ddply (data, .(interval), summarize, avg.steps=mean(steps, na.rm=TRUE))
+str(avg.steps.per.interval)
+
+The resulting dataframe has 288 observations in 2 variables, 'interval' and 'avg.steps'.
 
 ## Imputing missing values
 
