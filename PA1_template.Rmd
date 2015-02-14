@@ -53,7 +53,25 @@ There was no transformation of the data needed. The data is stored in a datafram
 
 ## What is mean total number of steps taken per day?
 
+The mean number of steps is derived by creating a dataframe called 'steps.per.day'.
 
+``` {creating mean dataframe}
+library (plyr)
+steps.per.day<-ddply(data, .(date), summarize,total=sum(steps,na.rm=TRUE))
+str(steps.per.day)
+```
+
+'steps.per.day' is a dataframe of 61 observations in 2 variables 'date' and 'total'.
+
+The total number of steps per day can be graphically shown in the following manner:
+
+``` {plotting bar chart of total steps per day}
+library(ggplot2)
+
+cl <- colors() #colors is a vector containing the color palete
+par(ps=10, mar=c(3.1,2.1,6.1,2.1), fg="blue4",col.lab="violetred4", col.main="violetred4", col.axis="violetred4", bg=cl[431])
+barplot(steps.per.day$total,main="Total Steps per Day", xlab="Day", ylab="Total Steps", names.arg=steps.per.day$date)
+```
 
 ## What is the average daily activity pattern?
 
