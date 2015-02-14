@@ -49,7 +49,7 @@ The dataset is stored in a comma-separated-value (CSV) file and there are a tota
 data <- read.csv("activity.csv")
 str(data)
 ```
-There was no transformation of the data needed. The data is stored in a dataframe called 'data'.
+There was no transformation of the data needed. The data is stored in a dataframe called 'data'. The dataframe consist of 17,568 observations of 3 variables: 'steps', 'date', 'interval'.
 
 ## What is mean total number of steps taken per day?
 
@@ -61,7 +61,7 @@ steps.per.day<-ddply(data, .(date), summarize,total=sum(steps,na.rm=TRUE))
 str(steps.per.day)
 ```
 
-'steps.per.day' is a dataframe of 61 observations in 2 variables 'date' and 'total'.
+'steps.per.day' is a dataframe of 61 observations in 2 variables: 'date' and 'total'.
 
 The total number of steps per day can be graphically shown in the following manner:
 
@@ -80,19 +80,19 @@ daily.mean <- mean(steps.per.day$total)
 daily.median <- median(steps.per.day$total)
 ```
 
-The daily mean is 9,354.23. 
-The daily median is 10,395.
+The daily mean steps is 9,354.23. 
+The daily median steps is 10,395.
 
 ## What is the average daily activity pattern?
 
-The average computed across each 3-minute interval and across all days can be computed by subsetting a new datframe using 'data$interval' and summarized by mean.
+The average computed across each 3-minute interval and across all days can be computed by subsetting a new dataframe using 'data$interval' and summarized by mean.
 
 ```{getting mean for the 5-min intervals}
 avg.steps.per.interval<- ddply (data, .(interval), summarize, avg.steps=mean(steps, na.rm=TRUE))
 str(avg.steps.per.interval)
 ```
 
-The resulting dataframe has 288 observations in 2 variables, 'interval' and 'avg.steps'.
+The resulting dataframe has 288 observations in 2 variables: 'interval' and 'avg.steps'.
 
 ## Imputing missing values
 
