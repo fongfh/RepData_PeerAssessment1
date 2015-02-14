@@ -73,6 +73,16 @@ par(ps=10, mar=c(3.1,2.1,6.1,2.1), fg="blue4",col.lab="violetred4", col.main="vi
 barplot(steps.per.day$total,main="Total Steps per Day", xlab="Day", ylab="Total Steps", names.arg=steps.per.day$date)
 ```
 
+The mean and median of the daily number of steps can be computed in the following manner:
+
+```{mean & median}
+daily.mean <- mean(steps.per.day$total)
+daily.median <- median(steps.per.day$total)
+```
+
+The daily mean is 9354.23. 
+The daily median is 10395.
+
 ## What is the average daily activity pattern?
 
 
