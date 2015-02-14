@@ -45,7 +45,7 @@ The dataset is stored in a comma-separated-value (CSV) file and there are a tota
 
 ## Loading and preprocessing the data
 
-``` {r loading data}
+``` {r graph1}
 data <- read.csv("activity.csv")
 str(data)
 ```
@@ -55,7 +55,7 @@ There was no transformation of the data needed. The data is stored in a datafram
 
 The mean number of steps is derived by creating a dataframe called 'steps.per.day'.
 
-``` {creating mean dataframe}
+``` {r creating mean dataframe}
 library (plyr)
 steps.per.day<-ddply(data, .(date), summarize,total=sum(steps,na.rm=TRUE))
 str(steps.per.day)
@@ -65,7 +65,7 @@ str(steps.per.day)
 
 The total number of steps per day can be graphically shown in the following manner:
 
-``` {plotting bar chart of total steps per day}
+``` {r graph2}
 library(ggplot2)
 
 cl <- colors() #colors is a vector containing the color palete
@@ -75,19 +75,19 @@ barplot(steps.per.day$total,main="Total Steps per Day", xlab="Day", ylab="Total 
 
 The mean and median of the daily number of steps can be computed in the following manner:
 
-```{mean & median}
+```{r mean & median}
 daily.mean <- mean(steps.per.day$total)
 daily.median <- median(steps.per.day$total)
 ```
 
-The daily mean steps is 9,354.23. 
-The daily median steps is 10,395.
+The daily mean steps is `r daily.mean`. 
+The daily median steps is `r daily.median`.
 
 ## What is the average daily activity pattern?
 
 The average computed across each 3-minute interval and across all days can be computed by subsetting a new dataframe using 'data$interval' and summarized by mean.
 
-```{getting mean for the 5-min intervals}
+```{r getting mean for the 5-min intervals}
 avg.steps.per.interval<- ddply (data, .(interval), summarize, avg.steps=mean(steps, na.rm=TRUE))
 str(avg.steps.per.interval)
 ```
@@ -103,7 +103,7 @@ print (g)
 
 To find the Interval where the maximum number of steps occur, we can do the following.
 
-```{which max did it occur}
+```{r which max did it occur}
 result <- avg.steps.per.interval$interval[which.max(avg.steps.per.interval$avg.steps)]
 ```
 The maximum number of steps occurs at interval `r result`. 
