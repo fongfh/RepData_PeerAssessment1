@@ -94,6 +94,25 @@ str(avg.steps.per.interval)
 
 The resulting dataframe has 288 observations in 2 variables: 'interval' and 'avg.steps'.
 
+The time series plot of the Average number of steps per day over all the 5-min intervals can be done in the following manner.
+
+```{}
+g<-ggplot (avg.steps.per.interval, aes(x=interval, y=avg.steps)) + geom_line() +labs(x="Interval", y="Average Steps per Interval", title="Plot of Average Steps per Intervals" )
+print (g)
+```
+
+To find the Interval where the maximum number of steps occur, we can do the following.
+
+```{which max did it occur}
+avg.steps.per.interval$interval[which.max(avg.steps.per.interval$avg.steps)]
+```
+
+The corresponding maximum number of steps can be found from the follwoing.
+
+```{}
+avg.steps.per.interval$avg.steps[which.max(avg.steps.per.interval$avg.steps)]
+```
+
 ## Imputing missing values
 
 
