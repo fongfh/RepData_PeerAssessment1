@@ -80,8 +80,8 @@ daily.mean <- mean(steps.per.day$total)
 daily.median <- median(steps.per.day$total)
 ```
 
-The daily mean is 9354.23. 
-The daily median is 10395.
+The daily mean is 9,354.23. 
+The daily median is 10,395.
 
 ## What is the average daily activity pattern?
 
@@ -90,6 +90,7 @@ The average computed across each 3-minute interval and across all days can be co
 ```{getting mean for the 5-min intervals}
 avg.steps.per.interval<- ddply (data, .(interval), summarize, avg.steps=mean(steps, na.rm=TRUE))
 str(avg.steps.per.interval)
+```
 
 The resulting dataframe has 288 observations in 2 variables, 'interval' and 'avg.steps'.
 
