@@ -104,14 +104,16 @@ print (g)
 To find the Interval where the maximum number of steps occur, we can do the following.
 
 ```{which max did it occur}
-avg.steps.per.interval$interval[which.max(avg.steps.per.interval$avg.steps)]
+result <- avg.steps.per.interval$interval[which.max(avg.steps.per.interval$avg.steps)]
 ```
-
-The corresponding maximum number of steps can be found from the follwoing.
+The maximum number of steps occurs at interval `r result`. 
+The corresponding maximum number of steps can be found from the following.
 
 ```{}
-avg.steps.per.interval$avg.steps[which.max(avg.steps.per.interval$avg.steps)]
+max.steps <- avg.steps.per.interval$avg.steps[which.max(avg.steps.per.interval$avg.steps)]
 ```
+
+The maximum number of steps is `r max.steps`.
 
 ## Imputing missing values
 
