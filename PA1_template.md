@@ -97,9 +97,10 @@ The mean and median of the daily number of steps can be computed in the followin
 ```r
 daily.mean <- mean(steps.per.day$total)
 daily.median <- median(steps.per.day$total)
+options(scipen=9, digits=2) 
 ```
 
-The daily mean steps is 9354.2295082. 
+The daily mean steps is 9354.23. 
 The daily median steps is 10395.
 
 ## What is the average daily activity pattern?
@@ -144,7 +145,7 @@ The corresponding maximum number of steps can be found from the following.
 max.steps <- avg.steps.per.interval$avg.steps[which.max(avg.steps.per.interval$avg.steps)]
 ```
 
-The maximum number of steps is 206.1698113.
+The maximum number of steps is 206.17.
 
 ## Imputing missing values
 
@@ -210,7 +211,7 @@ str(imputed.steps.per.day)
 ```
 ## 'data.frame':	61 obs. of  2 variables:
 ##  $ date       : Date, format: "2012-10-01" "2012-10-02" ...
-##  $ total.steps: int  17224 126 11352 12116 13294 15420 11015 14301 12811 9900 ...
+##  $ total.steps: int  14663 126 11352 12116 13294 15420 11015 13761 12811 9900 ...
 ```
 
 We can then create a barplot of the data.
@@ -301,15 +302,15 @@ imputed.daily.mean <- mean(imputed.steps.per.day$total)
 imputed.daily.median <- median(imputed.steps.per.day$total)
 ```
 
-The imputed daily mean steps is 1.1496328 &times; 10<sup>4</sup> compared to the original mean steps of 9354.2295082. 
-The daily median steps is 11458 compared to the original median steps of 10395. .
+The imputed daily mean steps is 11222.3 compared to the original mean steps of 9354.23. 
+The daily median steps is 11162 compared to the original median steps of 10395. .
 
 Thus we can see that both the imputed mean and median are higher than before the data was imputed. This is to be expected since we are extrapolating and filling in the empty spaces with a number.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-The data can be divided between 'weekdays' and 'weekends' in the following manner.
+The data can be divided between 'weekdays' and 'weekends' in the following manner. The 'weekdays() function is used to check if a date is a weekday or weekend.
 
 
 ```r
@@ -324,7 +325,7 @@ str(imputed.steps.per.interval)
 ## 'data.frame':	576 obs. of  3 variables:
 ##  $ interval : int  0 0 5 5 10 10 15 15 20 20 ...
 ##  $ day.type : Factor w/ 2 levels "weekday","weekend": 1 2 1 2 1 2 1 2 1 2 ...
-##  $ avg.steps: num  8.87 9.62 2.73 2.25 16.33 ...
+##  $ avg.steps: num  10.71 8.25 2.11 0.5 0.2 ...
 ```
 
 The above creates a dataframe from the imputed data and consist of 3 observations: 'interval', day.type' and 'avg.steps'.

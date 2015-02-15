@@ -78,7 +78,7 @@ The mean and median of the daily number of steps can be computed in the followin
 ```{r mean & median}
 daily.mean <- mean(steps.per.day$total)
 daily.median <- median(steps.per.day$total)
-options(scipen=9)
+options(scipen=9, digits=2) 
 ```
 
 The daily mean steps is `r daily.mean`. 
@@ -165,7 +165,7 @@ Thus we can see that both the imputed mean and median are higher than before the
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-The data can be divided between 'weekdays' and 'weekends' in the following manner.
+The data can be divided between 'weekdays' and 'weekends' in the following manner. The 'weekdays() function is used to check if a date is a weekday or weekend.
 
 ```{r weekdays & weekends}
 imputed.data.final$day.type <- ifelse (weekdays(as.Date(imputed.data.final$date)) %in% c("Saturday", "Sunday"),"weekend", "weekday")
