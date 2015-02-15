@@ -78,6 +78,7 @@ The mean and median of the daily number of steps can be computed in the followin
 ```{r mean & median}
 daily.mean <- mean(steps.per.day$total)
 daily.median <- median(steps.per.day$total)
+options(scipen=9)
 ```
 
 The daily mean steps is `r daily.mean`. 
