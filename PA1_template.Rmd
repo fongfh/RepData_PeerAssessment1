@@ -48,8 +48,10 @@ The dataset is stored in a comma-separated-value (CSV) file and there are a tota
 ``` {r read csv data}
 data <- read.csv("activity.csv")
 str(data)
+row1<-nrow(data)
+column1<-ncol(data)
 ```
-There was no transformation of the data needed. The data is stored in a dataframe called 'data'. The dataframe consist of 17,568 observations of 3 variables: 'steps', 'date', 'interval'.
+There was no pre-processing of the data needed. The data is stored in a dataframe called 'data'. The dataframe consist of `r row1` observations of `r column1` variables: 'steps', 'date', 'interval'.
 
 ## What is mean total number of steps taken per day?
 
@@ -59,9 +61,11 @@ The mean number of steps is derived by creating a dataframe called 'steps.per.da
 library (plyr)
 steps.per.day<-ddply(data, .(date), summarize,total=sum(steps,na.rm=TRUE))
 str(steps.per.day)
+row2<- nrow(steps.per.day)
+column2<- ncol(steps.per.day) 
 ```
 
-'steps.per.day' is a dataframe of 61 observations in 2 variables: 'date' and 'total'.
+'steps.per.day' is a dataframe of `r row2` observations in `r column2` variables: 'date' and 'total'.
 
 The total number of steps per day can be graphically shown in the following manner:
 
@@ -91,9 +95,12 @@ The average computed across each 3-minute interval and across all days can be co
 ```{r getting mean for the 5-min intervals}
 avg.steps.per.interval<- ddply (data, .(interval), summarize, avg.steps=mean(steps, na.rm=TRUE))
 str(avg.steps.per.interval)
+row3 <- nrow(avg.steps.per.interval)
+column3 <- ncol(avg.steps.per.interval)
+
 ```
 
-The resulting dataframe has 288 observations in 2 variables: 'interval' and 'avg.steps'.
+The resulting dataframe has `r row3` observations in `r column3` variables: 'interval' and 'avg.steps'.
 
 The time series plot of the Average number of steps per day over all the 5-min intervals can be done in the following manner.
 
@@ -180,10 +187,10 @@ The above creates a dataframe from the imputed data and consist of 3 observation
 A panel plot of the data can be obtained through the following.
 
 ```{r graph 4}
-g<-ggplot (imputed.steps.per.interval, aes(x=interval, y=avg.steps)) + geom_line() +theme_bw() +facet_wrap(~day.type, ncol=1) +labs(x="Interval", y="Average Steps per Interval", title="Average Steps per Intervals over Weekdays & Weekends" )
+g<-ggplot (imputed.steps.per.interval, aes(x=interval, y=avg.steps)) +stat_smooth(color='blue') +geom_line() +theme_bw() +facet_wrap(~day.type, ncol=1) +labs(x="Interval", y="Average Steps per Interval", title="Average Steps per Intervals over Weekdays & Weekends" )
 print(g)
 ```
 
-From the graphs above, there is no significant difference in pattern between the average steps over intervals between weekdays and weekends. 
+From the graphs above, we can see that between the 1000 to 2000 5-minute intervals, the average steps are higher than on weekdays. For the rest of the intervals, there is no significant difference in pattern between the average steps over intervals between weekdays and weekends. 
 
 

@@ -57,7 +57,12 @@ str(data)
 ##  $ date    : Factor w/ 61 levels "2012-10-01","2012-10-02",..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
 ```
-There was no transformation of the data needed. The data is stored in a dataframe called 'data'. The dataframe consist of 17,568 observations of 3 variables: 'steps', 'date', 'interval'.
+
+```r
+row1<-nrow(data)
+column1<-ncol(data)
+```
+There was no pre-processing of the data needed. The data is stored in a dataframe called 'data'. The dataframe consist of 17568 observations of 3 variables: 'steps', 'date', 'interval'.
 
 ## What is mean total number of steps taken per day?
 
@@ -74,6 +79,11 @@ str(steps.per.day)
 ## 'data.frame':	61 obs. of  2 variables:
 ##  $ date : Factor w/ 61 levels "2012-10-01","2012-10-02",..: 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ total: int  0 126 11352 12116 13294 15420 11015 0 12811 9900 ...
+```
+
+```r
+row2<- nrow(steps.per.day)
+column2<- ncol(steps.per.day) 
 ```
 
 'steps.per.day' is a dataframe of 61 observations in 2 variables: 'date' and 'total'.
@@ -117,6 +127,11 @@ str(avg.steps.per.interval)
 ## 'data.frame':	288 obs. of  2 variables:
 ##  $ interval : int  0 5 10 15 20 25 30 35 40 45 ...
 ##  $ avg.steps: num  1.717 0.3396 0.1321 0.1509 0.0755 ...
+```
+
+```r
+row3 <- nrow(avg.steps.per.interval)
+column3 <- ncol(avg.steps.per.interval)
 ```
 
 The resulting dataframe has 288 observations in 2 variables: 'interval' and 'avg.steps'.
@@ -211,7 +226,7 @@ str(imputed.steps.per.day)
 ```
 ## 'data.frame':	61 obs. of  2 variables:
 ##  $ date       : Date, format: "2012-10-01" "2012-10-02" ...
-##  $ total.steps: int  14505 126 11352 12116 13294 15420 11015 13007 12811 9900 ...
+##  $ total.steps: int  13264 126 11352 12116 13294 15420 11015 11351 12811 9900 ...
 ```
 
 We can then create a barplot of the data.
@@ -302,8 +317,8 @@ imputed.daily.mean <- mean(imputed.steps.per.day$total)
 imputed.daily.median <- median(imputed.steps.per.day$total)
 ```
 
-The imputed daily mean steps is 10932.87 compared to the original mean steps of 9354.23. 
-The daily median steps is 11162 compared to the original median steps of 10395. .
+The imputed daily mean steps is 11104.62 compared to the original mean steps of 9354.23. 
+The daily median steps is 11351 compared to the original median steps of 10395. .
 
 Thus we can see that both the imputed mean and median are higher than before the data was imputed. This is to be expected since we are extrapolating and filling in the empty spaces with simulated, likely some are non-zero, data.
 
@@ -325,7 +340,7 @@ str(imputed.steps.per.interval)
 ## 'data.frame':	576 obs. of  3 variables:
 ##  $ interval : int  0 0 5 5 10 10 15 15 20 20 ...
 ##  $ day.type : Factor w/ 2 levels "weekday","weekend": 1 2 1 2 1 2 1 2 1 2 ...
-##  $ avg.steps: num  30.67 0 1.47 3 31.29 ...
+##  $ avg.steps: num  2.02 7.12 1.73 0 4.71 ...
 ```
 
 The above creates a dataframe from the imputed data and consist of 3 observations: 'interval', day.type' and 'avg.steps'.
@@ -334,12 +349,17 @@ A panel plot of the data can be obtained through the following.
 
 
 ```r
-g<-ggplot (imputed.steps.per.interval, aes(x=interval, y=avg.steps)) + geom_line() +theme_bw() +facet_wrap(~day.type, ncol=1) +labs(x="Interval", y="Average Steps per Interval", title="Average Steps per Intervals over Weekdays & Weekends" )
+g<-ggplot (imputed.steps.per.interval, aes(x=interval, y=avg.steps)) +stat_smooth(color='blue') +geom_line() +theme_bw() +facet_wrap(~day.type, ncol=1) +labs(x="Interval", y="Average Steps per Interval", title="Average Steps per Intervals over Weekdays & Weekends" )
 print(g)
+```
+
+```
+## geom_smooth: method="auto" and size of largest group is <1000, so using loess. Use 'method = x' to change the smoothing method.
+## geom_smooth: method="auto" and size of largest group is <1000, so using loess. Use 'method = x' to change the smoothing method.
 ```
 
 ![plot of chunk graph 4](figure/graph 4-1.png) 
 
-From the graphs above, there is no significant difference in pattern between the average steps over intervals between weekdays and weekends. 
+From the graphs above, we can see that between the 1000 to 2000 5-minute intervals, the average steps are higher than on weekdays. For the rest of the intervals, there is no significant difference in pattern between the average steps over intervals between weekdays and weekends. 
 
 
