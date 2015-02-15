@@ -107,8 +107,7 @@ The resulting dataframe has `r row3` observations in `r column3` variables: 'int
 The time series plot of the Average number of steps per day over all the 5-min intervals can be done in the following manner.
 
 ```{r graph2, fig.width=10}
-g<-ggplot (avg.steps.per.interval, aes(x=interval, y=avg.steps)) + geom_line()
-+labs(x="Interval", y="Average Steps per Interval", title="Plot of Average Steps 
+g<-ggplot (avg.steps.per.interval, aes(x=interval, y=avg.steps)) + geom_line() +labs(x="Interval", y="Average Steps per Interval", title="Plot of Average Steps 
 per Intervals" )
 print (g)
 ```

@@ -142,16 +142,8 @@ The time series plot of the Average number of steps per day over all the 5-min i
 
 
 ```r
-g<-ggplot (avg.steps.per.interval, aes(x=interval, y=avg.steps)) + geom_line()
-+labs(x="Interval", y="Average Steps per Interval", title="Plot of Average Steps 
+g<-ggplot (avg.steps.per.interval, aes(x=interval, y=avg.steps)) + geom_line() +labs(x="Interval", y="Average Steps per Interval", title="Plot of Average Steps 
 per Intervals" )
-```
-
-```
-## Error in +labs(x = "Interval", y = "Average Steps per Interval", title = "Plot of Average Steps \nper Intervals"): invalid argument to unary operator
-```
-
-```r
 print (g)
 ```
 
@@ -237,7 +229,7 @@ str(imputed.steps.per.day)
 ```
 ## 'data.frame':	61 obs. of  2 variables:
 ##  $ date       : Date, format: "2012-10-01" "2012-10-02" ...
-##  $ total.steps: int  14679 126 11352 12116 13294 15420 11015 12118 12811 9900 ...
+##  $ total.steps: int  14394 126 11352 12116 13294 15420 11015 12011 12811 9900 ...
 ```
 
 We can then create a barplot of the data.
@@ -330,8 +322,8 @@ imputed.daily.mean <- mean(imputed.steps.per.day$total)
 imputed.daily.median <- median(imputed.steps.per.day$total)
 ```
 
-The imputed daily mean steps is 11261.87 compared to the original mean steps of 9354.23. 
-The daily median steps is 11458 compared to the original median steps of 10395. .
+The imputed daily mean steps is 10924.72 compared to the original mean steps of 9354.23. 
+The daily median steps is 11162 compared to the original median steps of 10395. .
 
 Thus we can see that both the imputed mean and median are higher than before the data was imputed. This is to be expected since we are extrapolating and filling in the empty spaces with simulated, likely some are non-zero, data.
 
@@ -354,7 +346,7 @@ str(imputed.steps.per.interval)
 ## 'data.frame':	576 obs. of  3 variables:
 ##  $ interval : int  0 0 5 5 10 10 15 15 20 20 ...
 ##  $ day.type : Factor w/ 2 levels "weekday","weekend": 1 2 1 2 1 2 1 2 1 2 ...
-##  $ avg.steps: num  10.978 25.188 2.356 0 0.556 ...
+##  $ avg.steps: num  2.02 0 1.11 1.12 1.62 ...
 ```
 
 The above creates a dataframe from the imputed data and consist of 3 observations: 'interval', day.type' and 'avg.steps'.
