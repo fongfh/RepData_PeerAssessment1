@@ -160,12 +160,12 @@ imputed.daily.median <- median(imputed.steps.per.day$total)
 The imputed daily mean steps is `r imputed.daily.mean` compared to the original mean steps of `r daily.mean`. 
 The daily median steps is `r imputed.daily.median` compared to the original median steps of `r daily.median`. .
 
-Thus we can see that both the imputed mean and median are higher than before the data was imputed. This is to be expected since we are extrapolating and filling in the empty spaces with a number.
+Thus we can see that both the imputed mean and median are higher than before the data was imputed. This is to be expected since we are extrapolating and filling in the empty spaces with simulated, likely some are non-zero, data.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-The data can be divided between 'weekdays' and 'weekends' in the following manner. The 'weekdays() function is used to check if a date is a weekday or weekend.
+The data can be divided between 'weekdays' and 'weekends' in the following manner. The 'weekdays()' function is used to check if a date is a weekday or weekend.
 
 ```{r weekdays & weekends}
 imputed.data.final$day.type <- ifelse (weekdays(as.Date(imputed.data.final$date)) %in% c("Saturday", "Sunday"),"weekend", "weekday")
@@ -184,6 +184,6 @@ g<-ggplot (imputed.steps.per.interval, aes(x=interval, y=avg.steps)) + geom_line
 print(g)
 ```
 
-From the graphs above, there is no significant differences between the average steps over interval between weekdays and weekends. 
+From the graphs above, there is no significant difference in pattern between the average steps over intervals between weekdays and weekends. 
 
 
