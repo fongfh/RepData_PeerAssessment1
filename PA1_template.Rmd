@@ -137,6 +137,7 @@ Next we extract a dataframe to hold the total of steps per day.
 ```{r create new dataframe}
 imputed.data.final$date <- as.Date(imputed.data.final$date, "%Y-%m-%d")
 imputed.steps.per.day <- ddply (imputed.data.final, .(date), summarize, total.steps=sum(steps))
+str(imputed.steps.per.day)
 ```
 
 We can then create a barplot of the data.
@@ -170,6 +171,7 @@ imputed.data.final$day.type <- ifelse (weekdays(as.Date(imputed.data.final$date)
 imputed.data.final$day.type <- as.factor (imputed.data.final$day.type)
 
 imputed.steps.per.interval <- ddply(imputed.data.final, .(interval, day.type), summarize, avg.steps=mean(steps))
+str(imputed.steps.per.interval)
 ```
 
 The above creates a dataframe from the imputed data and consist of 3 observations: 'interval', day.type' and 'avg.steps'.

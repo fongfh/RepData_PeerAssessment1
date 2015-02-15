@@ -48,18 +48,6 @@ The dataset is stored in a comma-separated-value (CSV) file and there are a tota
 
 ```r
 data <- read.csv("activity.csv")
-```
-
-```
-## Warning in file(file, "rt"): cannot open file 'activity.csv': No such file
-## or directory
-```
-
-```
-## Error in file(file, "rt"): cannot open the connection
-```
-
-```r
 str(data)
 ```
 
@@ -216,6 +204,13 @@ Next we extract a dataframe to hold the total of steps per day.
 ```r
 imputed.data.final$date <- as.Date(imputed.data.final$date, "%Y-%m-%d")
 imputed.steps.per.day <- ddply (imputed.data.final, .(date), summarize, total.steps=sum(steps))
+str(imputed.steps.per.day)
+```
+
+```
+## 'data.frame':	61 obs. of  2 variables:
+##  $ date       : Date, format: "2012-10-01" "2012-10-02" ...
+##  $ total.steps: int  17224 126 11352 12116 13294 15420 11015 14301 12811 9900 ...
 ```
 
 We can then create a barplot of the data.
@@ -306,7 +301,7 @@ imputed.daily.mean <- mean(imputed.steps.per.day$total)
 imputed.daily.median <- median(imputed.steps.per.day$total)
 ```
 
-The imputed daily mean steps is 1.1379541 &times; 10<sup>4</sup> compared to the original mean steps of 9354.2295082. 
+The imputed daily mean steps is 1.1496328 &times; 10<sup>4</sup> compared to the original mean steps of 9354.2295082. 
 The daily median steps is 11458 compared to the original median steps of 10395. .
 
 Thus we can see that both the imputed mean and median are higher than before the data was imputed. This is to be expected since we are extrapolating and filling in the empty spaces with a number.
@@ -322,6 +317,14 @@ imputed.data.final$day.type <- ifelse (weekdays(as.Date(imputed.data.final$date)
 imputed.data.final$day.type <- as.factor (imputed.data.final$day.type)
 
 imputed.steps.per.interval <- ddply(imputed.data.final, .(interval, day.type), summarize, avg.steps=mean(steps))
+str(imputed.steps.per.interval)
+```
+
+```
+## 'data.frame':	576 obs. of  3 variables:
+##  $ interval : int  0 0 5 5 10 10 15 15 20 20 ...
+##  $ day.type : Factor w/ 2 levels "weekday","weekend": 1 2 1 2 1 2 1 2 1 2 ...
+##  $ avg.steps: num  8.87 9.62 2.73 2.25 16.33 ...
 ```
 
 The above creates a dataframe from the imputed data and consist of 3 observations: 'interval', day.type' and 'avg.steps'.
