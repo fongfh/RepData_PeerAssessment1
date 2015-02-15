@@ -73,8 +73,10 @@ The total number of steps per day can be graphically shown in the following mann
 library(ggplot2)
 
 cl <- colors() #colors is a vector containing the color palete
-par(ps=10, mar=c(3.1,2.1,6.1,2.1), fg="blue4",col.lab="violetred4", col.main="violetred4", col.axis="violetred4", bg=cl[431])
-barplot(steps.per.day$total,main="Total Steps per Day", xlab="Day", ylab="Total Steps", names.arg=steps.per.day$date)
+par(ps=10, mar=c(3.1,2.1,6.1,2.1), fg="blue4",col.lab="violetred4", col.main="violetred4",
+col.axis="violetred4", bg=cl[431])
+barplot(steps.per.day$total,main="Total Steps per Day", xlab="Day", ylab="Total Steps",
+names.arg=steps.per.day$date)
 ```
 
 The mean and median of the daily number of steps can be computed in the following manner:
@@ -105,7 +107,9 @@ The resulting dataframe has `r row3` observations in `r column3` variables: 'int
 The time series plot of the Average number of steps per day over all the 5-min intervals can be done in the following manner.
 
 ```{r graph2, fig.width=10}
-g<-ggplot (avg.steps.per.interval, aes(x=interval, y=avg.steps)) + geom_line() +labs(x="Interval", y="Average Steps per Interval", title="Plot of Average Steps per Intervals" )
+g<-ggplot (avg.steps.per.interval, aes(x=interval, y=avg.steps)) + geom_line()
++labs(x="Interval", y="Average Steps per Interval", title="Plot of Average Steps 
+per Intervals" )
 print (g)
 ```
 
@@ -152,8 +156,10 @@ We can then create a barplot of the data.
 
 ```{r graph3, fig.width=10}
 cl <- colors() #colors is a vector containing the color palete
-par(ps=10, mar=c(3.1,2.1,6.1,2.1), fg="blue4",col.lab="violetred4", col.main="violetred4", col.axis="violetred4", bg=cl[431])
-g<-barplot(imputed.steps.per.day$total,main="Total Steps per Day", xlab="Day", ylab="Total Steps", names.arg=imputed.steps.per.day$date)
+par(ps=10, mar=c(3.1,2.1,6.1,2.1), fg="blue4",col.lab="violetred4", col.main="violetred4",
+col.axis="violetred4", bg=cl[431])
+g<-barplot(imputed.steps.per.day$total,main="Total Steps per Day", xlab="Day", ylab="Total
+Steps", names.arg=imputed.steps.per.day$date)
 print(g)
 ```
 
@@ -175,7 +181,8 @@ Thus we can see that both the imputed mean and median are higher than before the
 The data can be divided between 'weekdays' and 'weekends' in the following manner. The 'weekdays()' function is used to check if a date is a weekday or weekend.
 
 ```{r weekdays & weekends}
-imputed.data.final$day.type <- ifelse (weekdays(as.Date(imputed.data.final$date)) %in% c("Saturday", "Sunday"),"weekend", "weekday")
+imputed.data.final$day.type <- ifelse (weekdays(as.Date(imputed.data.final$date)) %in%
+c("Saturday", "Sunday"),"weekend", "weekday")
 imputed.data.final$day.type <- as.factor (imputed.data.final$day.type)
 
 imputed.steps.per.interval <- ddply(imputed.data.final, .(interval, day.type), summarize, avg.steps=mean(steps))
@@ -187,7 +194,9 @@ The above creates a dataframe from the imputed data and consist of 3 observation
 A panel plot of the data can be obtained through the following.
 
 ```{r graph 4, fig.width=8}
-g<-ggplot (imputed.steps.per.interval, aes(x=interval, y=avg.steps)) +stat_smooth(color='blue', method='lm') +geom_line() +theme_bw() +facet_wrap(~day.type, ncol=1) +labs(x="Interval", y="Average Steps per Interval", title="Average Steps per Intervals over Weekdays & Weekends" )
+g<-ggplot (imputed.steps.per.interval, aes(x=interval, y=avg.steps)) +stat_smooth(color='blue',
+method='lm') +geom_line() +theme_bw() +facet_wrap(~day.type, ncol=1) +labs(x="Interval",
+y="Average Steps per Interval", title="Average Steps per Intervals over Weekdays & Weekends" )
 print (g)
 ```
 
